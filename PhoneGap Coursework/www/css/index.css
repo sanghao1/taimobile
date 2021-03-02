@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=text]:focus{
+    background-color:#F8ECE0;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+input[type=submit] {
+    background-color: #FF3333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.ui-content{
+    border-radius: 5px;
+    background-color:#D3D3D3;
+    padding: 10px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+h1{
+    text-align: center;
+}
+.error{
+    color: red;
+}
+
+.ui-select .ui-btn{
+    width: 100%;
+}
+
+
+
+

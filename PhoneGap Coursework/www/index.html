@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/createdata.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/data.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <title>I-Rating Restaurant</title>
+</head>
+<body>
+<div data-role="page" id="addpage">
+    <div data-role="panel" id="addPagePanel">
+        <h1>Menu</h1>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">Product</li>
+            <li data-icon="plus"><a href="#addpage">Add</a></li>
+            <li data-icon="grid"><a href="#loadpage">Load</a></li>
+        </ul>
+    </div>
+    <div data-role="header" data-position="fixed">
+        <a href="#addPagePanel"
+           class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all ui-shadow"></a>
+        <h1>Add product</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+       <form id="form">
+                <div class="row">
+                        <label for="name">Restaurant Name</label>
+                        <input type="text" id="name" name="name" class="name1">
+                        <div class="error"></div>
+                </div>
+                <div class="row">
+                        <label for="type">Restaurant Type</label>                        
+                        <select id="type" name="type">
+                            <option >Buffet Restaurant</option>
+                            <option >Veg Restaurant</option>
+                            <option >Janpan Restaurant</option>
+                            <option >VietNam Restaurant</option>
+                            <option >SuShi World Restaurant</option>
+                            <option >Hoturu Restaurant</option>
+                        </select>             
+                </div>
+                <div class="row">
+                    <label for="date">Date</label>
+                    <div> 
+                        <input  id="date" name="date" placeholder="dd/mm/yyyy" class="date" type ="date">
+                    </div>
+                    <div class="error"></div>
+                </div>
+                    <div class="row">
+                        <label for="price">Price</label>
+                    </div>
+                        <input type="text" id="price" name="price" class="Price">
+                        <div class="error"></div>
+        
+                <div class="row">
+             
+                        <label for="service">Service Rating</label>
+                    </div>
+             
+                        <select id="service" name="service">
+                            <option >Bad</option>
+                            <option >Normal</option>
+                            <option >Good</option>
+                            <option >Very Good</option>
+                        </select>
+
+                <div class="row">
+                        <label for="clean">Cleanliness Rating</label>
+                    </div>
+                        <select id="clean" name="clean">
+                            <option >Bad</option>
+                            <option >Normal</option>
+                            <option >Good</option>
+                            <option >Very Good</option>
+                        </select>
+                <div class="row">
+                        <label for="food">Food quality rating</label>
+                    </div>
+                
+                        <select id="food" name="food">
+                            <option >Bad</option>
+                            <option >Normal</option>
+                            <option >Good</option>
+                            <option >Very Good</option>
+                        </select>
+                <div class="row">
+                        <label for="note">Note</label>
+                    </div>
+                        <textarea id="note" name="note" placeholder="Write something.." 
+                        style="height:200px"></textarea>
+                <div class="row">
+                        <label for="nameReport">Report Person</label>
+                        <input type="text" id="nameReport" name="nameReport" class="nameReport">
+                        <div class="error"></div>
+                </div>
+                <div >
+                    <input type="submit" onclick="addProduct()" value="Rate" >
+                    <!-- onclick="addProduct()" -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div data-role="page" id="loadpage">
+    <div data-role="panel" id="loadPagePanel">
+        <h1>Menu</h1>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">Product</li>
+            <li data-icon="plus"><a href="#addpage">Add</a></li>
+            <li data-icon="grid"><a href="#loadpage">Load</a></li>
+        </ul>
+    </div>
+    <div data-role="header" data-position="fixed">
+        <a href="#loadPagePanel"
+           class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all ui-shadow"></a>
+        <h1>Load products</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <form class="ui-filterable">
+            <input data-type="search" id="txtKeyword"/>
+        </form>
+        <ul data-role="listview" data-filter="true"
+            data-input="#txtKeyword"
+            data-inset="true"
+            id="lstProducts" >
+        </ul>
+        <div data-role="popup" id="popupUpdateDelete">
+            <div data-role="header">
+                <a class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" data-rel="back"></a>
+                <h1>Options</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <a class="ui-btn ui-icon-delete ui-btn-icon-left ui-btn-inline"
+                   onclick="deleteProduct()"
+                >Delete</a>
+                <a class="ui-btn ui-icon-edit ui-btn-icon-left ui-btn-inline"
+                   href="#updatedialog"
+                >Update</a>
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+<div data-role="dialog" id="updatedialog">
+    <div data-role="header">
+        <h1>Update product</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+         <form id="form">
+                <div class="row">
+                        <label for="name">Restaurant Name</label>
+                        <input type="text" id="new-name" name="name" class="name1">
+                        <div class="error"></div>
+                </div>
+                <div class="row">
+                        <label for="type">Restaurant Type</label>                        
+                        <select id="new-type" name="type">
+                            <option >Buffet Restaurant</option>
+                            <option >Veg Restaurant</option>
+                            <option >Janpan Restaurant</option>
+                            <option >VietNam Restaurant</option>
+                            <option >SuShi World Restaurant</option>
+                            <option >Hoturu Restaurant</option>
+                        </select>             
+                </div>
+                <div class="row">
+                    <label for="date">Date</label>
+                    <div> 
+                        <input  id="new-date" name="date" placeholder="dd/mm/yyyy" class="date" type="date">
+                    </div>
+                </div>
+                    <div class="row">
+                        <label for="price">Price</label>
+                    </div>
+                        <input type="text" id="new-price" name="price" class="Price">
+                        <div class="error"></div>
+        
+                <div class="row">
+             
+                        <label for="service">Service Rating</label>
+                    </div>
+             
+                        <select id="new-services" name="service">
+                            <option >Bad</option>
+                            <option >Normal</option>
+                            <option >Good</option>
+                            <option >Very Good</option>
+                        </select>
+
+                <div class="row">
+                        <label for="clean">Cleanliness Rating</label>
+                    </div>
+                        <select id="new-clean" name="clean">
+                            <option >Bad</option>
+                            <option >Normal</option>
+                            <option >Good</option>
+                            <option >Very Good</option>
+                        </select>
+                <div class="row">
+                        <label for="food">Food quality rating</label>
+                    </div>
+                
+                        <select id="new-food" name="food">
+                            <option >Bad</option>
+                            <option >Normal</option>
+                            <option >Good</option>
+                            <option >Very Good</option>
+                        </select>
+                <div class="row">
+                        <label for="note">Note</label>
+                    </div>
+                        <textarea id="new-note" name="note" placeholder="Write something.." 
+                        style="height:200px"></textarea>
+                <div class="row">
+                        <label for="nameReport">Report Person</label>
+                        <input type="text" id="new-nameReport" name="nameReport" class="nameReport">
+                        <div class="error"></div>
+						<label for="btnUpdate"></label>
+                <a class="ui-btn ui-icon-plus ui-btn-icon-left"
+                   id="btnUpdate" onclick="updateProduct()">Update</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
